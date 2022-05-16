@@ -64,10 +64,12 @@ public class Trie {
                 if (currNode.links[codeArray[i]] != null) { 
                     currNode = currNode.links[codeArray[i]];
                 }
+            } else { 
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     public static int charCode(Character character) { 
@@ -79,7 +81,7 @@ public class Trie {
         System.out.println(testTrie.contains("HELLO") + " " + testTrie.contains("A"));
         testTrie.add("A");
 
-        System.out.println(testTrie.contains("HELLO") + " " + testTrie.contains("A"));
+        System.out.println(testTrie.contains("HELLO") + " " + testTrie.contains("A") + " " + testTrie.contains("FLOORPOGO"));
         
     }
 
