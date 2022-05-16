@@ -1,5 +1,7 @@
 package com.datastructurediagrammer.trees;
 
+import java.util.List;
+
 public class Trie {
     public TrieNode[] head;
 
@@ -7,9 +9,13 @@ public class Trie {
         head = new TrieNode[26];
     }
 
+    /**
+     * Adds word to trie. Utilizes the TrieNode.add() method to add a link to the next node to each interal node.
+     * @param newString A word to be added to the trie. Ideal input is uppercase and alphabet only. capability to handle spaces coming soon.
+     */
     public void add (String newString) { 
         // Fix up the string
-        newString = newString.toUpperCase();
+        newString = fix(newString, false);
         // TODO: Get rid of numbers and non-alphabet characters.
 
         // Split the string into a char array
@@ -49,6 +55,21 @@ public class Trie {
         }
     }
 
+    /**
+     * Helper method which adds an array of strings. Makes test cases cleaner.
+     * @param newStrings
+     */
+    public void add(String[] newStrings) { 
+        for (String word : newStrings) { 
+            this.add(word);
+        }
+    }
+
+    /**
+     * Checks whether the Trie contains a given word.
+     * @param searchKey Word to search for.
+     * @return boolean Trie contains or does not contain search key.
+     */
     public boolean contains(String searchKey) { 
         char[] charArray = searchKey.toCharArray();
         int[] codeArray = new int[charArray.length];
@@ -72,17 +93,54 @@ public class Trie {
         return true;
     }
 
+    /**
+     * Helper method to contains(String) which checks the trie for each word in the given array in order.
+     * @param searchKeys array
+     * @return Trie contains or does not contain search keys.
+     */
+    public boolean contains(String[] searchKeys) { 
+        for (String word: searchKeys) { 
+            if (!(this.contains(word))) { 
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Helper method to contains(String[]) which takes a List type, converts it to array, passes it in.
+     * @param searchKeysList List
+     * @return boolean Trie contains or does not contain search keys.
+     */
+    public <T> boolean contains(List<T> searchKeysList) { 
+        String[] searchKeys = (String[]) searchKeysList.toArray();
+        return this.contains(searchKeys);
+    }
+
     public static int charCode(Character character) { 
         return character - 65;
     }
-    public static void main(String[] args) { 
-        Trie testTrie = new Trie();
-        testTrie.add("HELLO");
-        System.out.println(testTrie.contains("HELLO") + " " + testTrie.contains("A"));
-        testTrie.add("A");
 
-        System.out.println(testTrie.contains("HELLO") + " " + testTrie.contains("A") + " " + testTrie.contains("FLOORPOGO"));
+    public static String fix(String rawString, boolean spacesAllowed) {
+        // First, get rid of spaces, if not allowed.
+        if (!spacesAllowed) {
+            rawString += rawString.replace(" ", "");
+        }
         
+        String newString = "";
+        
+        
+        // Get rid of not alphabet chars 
+        for (int i = 0; i < rawString.length(); ++i) { 
+            char current = rawString.charAt(i);
+            // Check that character is either: 1. English Alphabet letter or 2. it is a space, and spaces are allowed.
+            if ((Character.isLetter(current) || ((current == ' ') && spacesAllowed))) { 
+                newString += Character.toString(rawString.charAt(i));
+            }
+        }
+
+
+        return newString;
     }
 
 }
