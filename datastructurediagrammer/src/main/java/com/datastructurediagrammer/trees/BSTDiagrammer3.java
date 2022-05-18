@@ -101,9 +101,6 @@ public class BSTDiagrammer3<T extends Comparable<T>> implements DataStructureDia
         }
     }
 
-    public static void main(String[] args) { 
-    }
-
     //@Override
     public BufferedImage renderDiagram(BinarySearchTree<T> tree, String title) {
         int imageWidth = 1;

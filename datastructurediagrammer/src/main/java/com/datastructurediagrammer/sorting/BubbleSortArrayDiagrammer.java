@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 
 import com.datastructurediagrammer.BufferedImageFileWriter;
+import com.datastructurediagrammer.TimeStamp;
 import com.datastructurediagrammer.arrays.ArrayDiagrammer;
 
 /**
@@ -38,7 +39,7 @@ public class BubbleSortArrayDiagrammer <T extends Comparable<T>> {
         int swapNum = 1;
 
         // This timestamp will be used as part of the folder name
-        String timeStamp = LocalDateTime.now().toString().replace(':', '-');
+        String timeStamp = TimeStamp.ts();
 
         String dirName = dirpath + "/" + timeStamp + " Bubble Sort of " + title + "/";
 
