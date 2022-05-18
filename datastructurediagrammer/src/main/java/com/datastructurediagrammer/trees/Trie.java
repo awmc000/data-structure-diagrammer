@@ -60,8 +60,8 @@ public class Trie {
      * @param newStrings
      */
     public void add(String[] newStrings) { 
-        for (String word : newStrings) { 
-            this.add(word);
+        for (int i = 0; i < newStrings.length; ++i) { 
+            this.add(newStrings[i]);
         }
     }
 
@@ -70,7 +70,8 @@ public class Trie {
      * @param searchKey Word to search for.
      * @return boolean Trie contains or does not contain search key.
      */
-    public boolean contains(String searchKey) { 
+    public boolean contains(String searchKey) {
+        searchKey = fix(searchKey, false);
         char[] charArray = searchKey.toCharArray();
         int[] codeArray = new int[charArray.length];
 
@@ -99,8 +100,8 @@ public class Trie {
      * @return Trie contains or does not contain search keys.
      */
     public boolean contains(String[] searchKeys) { 
-        for (String word: searchKeys) { 
-            if (!(this.contains(word))) { 
+        for (int i = 0; i < searchKeys.length; ++i) { 
+            if (!(this.contains(searchKeys[i]))) { 
                 return false;
             }
         }
@@ -122,6 +123,9 @@ public class Trie {
     }
 
     public static String fix(String rawString, boolean spacesAllowed) {
+        // Capitalize
+        rawString = rawString.toUpperCase();
+        
         // First, get rid of spaces, if not allowed.
         if (!spacesAllowed) {
             rawString += rawString.replace(" ", "");
