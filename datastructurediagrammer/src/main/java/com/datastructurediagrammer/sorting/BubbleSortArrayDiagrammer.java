@@ -36,7 +36,7 @@ public class BubbleSortArrayDiagrammer <T extends Comparable<T>> {
      * @param title Title to be written to the top centre of the diagram.
      * @param dirpath  Absolute path of the system directory in which to create a folder of images of stages of bubblesort
      */
-    public String[] renderSortingOperation(T[] array, String title, String dirpath) { 
+    public ArrayList<String> renderSortingOperation(T[] array, String title, String dirpath) { 
         int swapNum = 1;
 
         // This timestamp will be used as part of the folder name
@@ -114,6 +114,6 @@ public class BubbleSortArrayDiagrammer <T extends Comparable<T>> {
         for (int i = 0; i < bufferedImages.size(); ++i) { 
             BufferedImageFileWriter.writeToFile(bufferedImages.get(i), fileNames.get(i));
         }
-        return (String[]) fileNames.toArray();
+        return fileNames;
     }
 }
