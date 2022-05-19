@@ -1,12 +1,10 @@
 package com.datastructurediagrammer.sorting;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-//import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 
@@ -24,9 +22,12 @@ public class BubbleSortArrayDiagrammer <T extends Comparable<T>> {
      * calls at each step.
      */
     private ArrayDiagrammer<T> arrayDiagrammer;
+    // If true, the diagrammer will write the value of i & j, and if a swap is happening on the diagram.
+    public boolean writesSteps;
 
     public BubbleSortArrayDiagrammer() { 
         arrayDiagrammer = new ArrayDiagrammer<T>();
+        writesSteps = true;
     }
 
     /**
@@ -35,7 +36,7 @@ public class BubbleSortArrayDiagrammer <T extends Comparable<T>> {
      * @param title Title to be written to the top centre of the diagram.
      * @param dirpath  Absolute path of the system directory in which to create a folder of images of stages of bubblesort
      */
-    public void renderSortingOperation(T[] array, String title, String dirpath) { 
+    public String[] renderSortingOperation(T[] array, String title, String dirpath) { 
         int swapNum = 1;
 
         // This timestamp will be used as part of the folder name
@@ -87,26 +88,32 @@ public class BubbleSortArrayDiagrammer <T extends Comparable<T>> {
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                     
-                    // If there was a swap made, let's write that to the top left.
-                    graphics.setColor(Color.BLUE);
-                    graphics.drawString(swapString, 5, 20);
-                    graphics.setColor(Color.BLACK);
+                    // If writing steps is enabled, and there was a swap made, let's write that to the top left.
+                    if (writesSteps) {
+                        graphics.setColor(Color.BLUE);
+                        graphics.drawString(swapString, 5, 20);
+                        graphics.setColor(Color.BLACK);
+                    }
 
                     swapNum++;
                 }
 
                 graphics.setColor(Color.BLACK);
-                graphics.drawString("i = " + i + "\nj = " + j, 5, 10);
                 
+                // Only write the i and j values if writing steps is enabled
+                if (writesSteps) {
+                    graphics.drawString("i = " + i + "\nj = " + j, 5, 10);
+                }
+
                 bufferedImages.add(bufferedImage);
                 fileNames.add(dirName  + timeStamp +  "Bubble Sort @ i = " + i + ", j = " + j + " of " + title + ".png");
             }
         }
         
-
         // Turn all the buffered images to files.
         for (int i = 0; i < bufferedImages.size(); ++i) { 
             BufferedImageFileWriter.writeToFile(bufferedImages.get(i), fileNames.get(i));
         }
+        return (String[]) fileNames.toArray();
     }
 }
