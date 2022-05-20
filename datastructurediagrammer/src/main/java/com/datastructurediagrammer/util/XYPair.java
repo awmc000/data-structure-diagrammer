@@ -1,4 +1,4 @@
-package com.datastructurediagrammer;
+package com.datastructurediagrammer.util;
 
 public class XYPair {
     public final int x;

@@ -1,12 +1,13 @@
 package com.datastructurediagrammer.arrays;
 
 import java.awt.image.BufferedImage;
+
+import com.datastructurediagrammer.util.BufferedImageFileWriter;
+import com.datastructurediagrammer.util.DataStructureDiagrammer;
+
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Color;
-
-import com.datastructurediagrammer.BufferedImageFileWriter;
-import com.datastructurediagrammer.DataStructureDiagrammer;
 
 public class ArrayDiagrammer<T> implements DataStructureDiagrammer<T[]> {
     /**

@@ -8,9 +8,9 @@ import java.nio.file.Paths;
 import java.awt.Graphics2D;
 import java.awt.Color;
 
-import com.datastructurediagrammer.BufferedImageFileWriter;
-import com.datastructurediagrammer.TimeStamp;
 import com.datastructurediagrammer.arrays.ArrayDiagrammer;
+import com.datastructurediagrammer.util.BufferedImageFileWriter;
+import com.datastructurediagrammer.util.TimeStamp;
 
 /**
  * Generates diagrams of each step as it performs a bubble sort on the given array.

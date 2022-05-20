@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.datastructurediagrammer.BufferedImageFileWriter;
+import com.datastructurediagrammer.util.BufferedImageFileWriter;
 
 import java.awt.Graphics2D;
 import java.awt.Color;

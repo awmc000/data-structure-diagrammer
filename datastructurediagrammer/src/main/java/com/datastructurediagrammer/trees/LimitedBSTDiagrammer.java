@@ -5,11 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.io.File;
-
-import com.datastructurediagrammer.BufferedImageFileWriter;
-import com.datastructurediagrammer.XYPair;
-
 import java.util.ArrayList;
+
+import com.datastructurediagrammer.util.BufferedImageFileWriter;
+import com.datastructurediagrammer.util.XYPair;
 
 public class LimitedBSTDiagrammer<T extends Comparable<T>> {
     // Oh what could have been. so much more efficient.

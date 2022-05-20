@@ -1,10 +1,8 @@
-package com.datastructurediagrammer;
+package com.datastructurediagrammer.linkedlists;
 
 import java.awt.image.BufferedImage;
 
-import com.datastructurediagrammer.linkedlists.DoublyLinkedList;
-import com.datastructurediagrammer.linkedlists.DoublyLinkedListDiagrammer;
-import com.datastructurediagrammer.linkedlists.Queue;
+import com.datastructurediagrammer.util.DataStructureDiagrammer;
 
 import java.awt.Graphics2D;
 import java.awt.Color;

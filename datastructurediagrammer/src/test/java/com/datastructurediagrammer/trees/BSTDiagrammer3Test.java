@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.datastructurediagrammer.TimeStamp;
+import com.datastructurediagrammer.util.TimeStamp;
 
 import org.junit.Test;
 

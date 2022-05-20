@@ -1,4 +1,4 @@
-package com.datastructurediagrammer;
+package com.datastructurediagrammer.util;
 
 import java.awt.image.BufferedImage;
 

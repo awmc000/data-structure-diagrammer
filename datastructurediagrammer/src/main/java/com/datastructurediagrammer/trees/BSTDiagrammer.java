@@ -1,10 +1,11 @@
 package com.datastructurediagrammer.trees;
 
 import java.awt.image.BufferedImage;
+
+import com.datastructurediagrammer.util.BufferedImageFileWriter;
+
 import java.awt.Graphics2D;
 import java.awt.Color;
-
-import com.datastructurediagrammer.BufferedImageFileWriter;
 
 /**
  * Use BSTDiagrammer3 instead.

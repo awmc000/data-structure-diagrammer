@@ -4,11 +4,10 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.FontMetrics;
-
-import com.datastructurediagrammer.BufferedImageFileWriter;
-import com.datastructurediagrammer.DataStructureDiagrammer;
-
 import java.util.ArrayList;
+
+import com.datastructurediagrammer.util.BufferedImageFileWriter;
+import com.datastructurediagrammer.util.DataStructureDiagrammer;
 /**
  * BST Diagrammer which should be more effective than the LimitedBSTDiagrammer.
  * Draws an "image" of the BST to a 2 dimensional arraylist and then draws to BufferedImage

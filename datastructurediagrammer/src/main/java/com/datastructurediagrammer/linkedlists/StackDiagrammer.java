@@ -1,6 +1,4 @@
-package com.datastructurediagrammer;
-
-import com.datastructurediagrammer.linkedlists.DoublyLinkedListDiagrammer;
+package com.datastructurediagrammer.linkedlists;
 
 public class StackDiagrammer {
     private DoublyLinkedListDiagrammer dllDiagrammer;

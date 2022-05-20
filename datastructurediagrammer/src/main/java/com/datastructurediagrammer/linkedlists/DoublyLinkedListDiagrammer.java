@@ -2,8 +2,8 @@ package com.datastructurediagrammer.linkedlists;
 
 import java.awt.image.BufferedImage;
 
-import com.datastructurediagrammer.BufferedImageFileWriter;
-import com.datastructurediagrammer.DataStructureDiagrammer;
+import com.datastructurediagrammer.util.BufferedImageFileWriter;
+import com.datastructurediagrammer.util.DataStructureDiagrammer;
 
 import java.awt.Graphics2D;
 import java.awt.Color;
