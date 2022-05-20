@@ -122,7 +122,7 @@ public class BSTDiagrammer3<T extends Comparable<T>> implements DataStructureDia
             }
         }
 
-        imageWidth = (hBuffer * 2) + (maxLevelNodes * 80) + 200;
+        imageWidth = (hBuffer * 2) + (maxLevelNodes * 4 * nodeWidth) + (20 * nodeWidth);
 
         bufferedImage = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
 
@@ -143,7 +143,7 @@ public class BSTDiagrammer3<T extends Comparable<T>> implements DataStructureDia
         graphics.setColor(Color.BLACK);
         graphics.drawString(title, titleX, titleY);
 
-        int elemX, elemY, nodesOnCurrLevel;
+        int elemX, elemY, xIncrement, nodesOnCurrLevel;
 
         // Work through the image, writing nodes.
         for (int i = 0; i < treeImage.size(); ++i) { 
@@ -157,7 +157,21 @@ public class BSTDiagrammer3<T extends Comparable<T>> implements DataStructureDia
                 nodeWidth = fontMetrics.stringWidth(currWrapper.node.getData().toString()) * 2 + 5;
 
                 // TODO: Improve the way the element's x-coordinate is determined
-                elemX = (imageWidth / (nodesOnCurrLevel)) * (j) + hBuffer;
+
+                xIncrement = (imageWidth / (nodesOnCurrLevel));
+
+                elemX = xIncrement * (j) + (hBuffer / 2);
+                
+                if (currWrapper.parent != null) {
+                    if (currWrapper.parent.node.left == currWrapper.node) { 
+                        elemX -= nodeWidth;
+                    } else { 
+                        elemX += nodeWidth;
+                    }
+                }
+                
+                elemX += (xIncrement / 2);
+                
                 if (nodesOnCurrLevel == 1) { 
                     elemX = imageWidth / 2;
                 }
@@ -175,9 +189,23 @@ public class BSTDiagrammer3<T extends Comparable<T>> implements DataStructureDia
                 // Write the data inside the node
                 graphics.drawString(currWrapper.node.getData().toString(), elemX + 5, elemY + levelHeight / 2 + 2);
 
+                // Set up variables for drawing line to parent
+                int topCentre, parentX;
+
                 // Draw a line to the parent!
                 if (currWrapper.parent != null) {
-                    graphics.drawLine(currWrapper.x + (nodeWidth / 2), currWrapper.y, currWrapper.parent.x, currWrapper.parent.y + levelHeight);
+                    topCentre = currWrapper.x + (nodeWidth / 2);
+                    if (currWrapper.x != currWrapper.parent.x) { 
+                        if (currWrapper.parent.node.left == currWrapper.node) { 
+                            parentX = currWrapper.parent.x + (currWrapper.parent.width / 2);
+                        } else { 
+                            parentX = currWrapper.parent.x; // - (currWrapper.parent.width / 2);
+                        }
+                    } else { 
+                        parentX = currWrapper.parent.x;
+                    }
+                    
+                    graphics.drawLine(topCentre, currWrapper.y, parentX, currWrapper.parent.y + levelHeight);
                 }
             }
         }
