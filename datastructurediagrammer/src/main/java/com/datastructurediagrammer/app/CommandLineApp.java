@@ -1,9 +1,11 @@
 package com.datastructurediagrammer.app;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.datastructurediagrammer.arrays.ArrayDiagrammer;
+import com.datastructurediagrammer.sorting.BubbleSortArrayDiagrammer;
 
 public class CommandLineApp {
 
@@ -19,6 +21,32 @@ public class CommandLineApp {
             return input.charAt(0);
         } else {
             return 'Z';
+        }
+    }
+
+    private static void dllSetupMenu(Scanner scanner, char in) { 
+        while (in != '0') { 
+            System.out.println("What type of operation would you like to perform on your linked list?\n" + 
+            "1. Prepend a value\n" + 
+            "2. Append  a value\n" + 
+            "3. Draw a diagram of the linked list to PNG\n" + 
+            "4. Write contents to console");
+            in = getInput(scanner);
+
+            // TODO: Implement options
+            switch (in) { 
+                case '1':
+                    break;
+
+                case '2':
+                    break;
+
+                case '3':
+                    break;
+
+                case '4':
+                    break;
+            }
         }
     }
 
@@ -47,7 +75,7 @@ public class CommandLineApp {
                 case '2':
                     String[] strArray = new String[10];
                     strArray[0] = "";
-                    stringArrayOpsMenu(scanner, in, strArray, TypeChoice.STRING);
+                    stringArrayOpsMenu(scanner, in, strArray);
                     break;
 
                 default:
@@ -59,11 +87,86 @@ public class CommandLineApp {
     }
 
     private static void integerArrayOpsMenu(Scanner scanner, Character input, Integer[] array, TypeChoice typeChoice) { 
+        while (input != '0') {
+            System.out.println("What type of operation would you like to perform on your array? \n" +
+            "1. Assign a value at a given index\n" +
+            "2. Assign array with new array of different size (truncating or padding w/ null)\n" +
+            "3. Draw a diagram of the array to PNG\n" +
+            "4. Draw a series of diagrams (PNG) of the array being sorted\n" +
+            "5. Write array contents to the console\n" +
+            "0. EXIT\n" +
+            "A. Repeat options");
+            input = getInput(scanner);
 
+            switch (input) { 
+                // User chooses to set an element.
+                case '1':
+                    System.out.print("Enter the index of the array to wish you which to assign: ");
+                    int index = Integer.parseInt(scanner.next());
+                    System.out.print("\nEnter the value you wish to insert at array " + index + ": ");
+                    String value = scanner.next();
+                    /*if (typeChoice.equals(TypeChoice.STRING)) { 
+                        array[index] = value;
+                    } else*/ if (typeChoice.equals(TypeChoice.INTEGER)) { 
+                        array[index] = Integer.parseInt(value);
+                    }
+                    System.out.println();
+                    break;
+
+                // User chooses to resize integer array.
+                case '2':
+                    System.out.print("Enter the new size for the array to be resized to: ");
+                    // A Java library method handles the copying for us.
+                    Integer[] newArr = Arrays.copyOf(array, scanner.nextInt());
+                    array = newArr;
+                    break;
+
+                // User chooses to draw a diagram.
+                case '3':
+                    System.out.print("Enter the absolute filepath to which you want to save your diagram:");
+                    String filepathChoice = scanner.next();
+                    System.out.print("\nEnter the title for your diagram: ");
+                    String titleChoice = scanner.next();
+                    System.out.println();
+                    ArrayDiagrammer<Integer> diagrammer = new ArrayDiagrammer<>();
+                    diagrammer.drawToFile(array, titleChoice, filepathChoice);
+                    break;
+
+                // User chooses to render a sorting operation.
+                case '4':
+                    System.out.println("Currently, only bubble sort is available!");
+                    System.out.print("Enter the absolute directory path to which you want to save your diagrams:");
+                    filepathChoice = scanner.next();
+                    System.out.print("\nEnter the title for your diagram: ");
+                    titleChoice = scanner.next();
+                    System.out.println();
+                    BubbleSortArrayDiagrammer<Integer> sortDiagrammer = new BubbleSortArrayDiagrammer<>();
+                    sortDiagrammer.renderSortingOperation(array, titleChoice, filepathChoice);
+                    break;
+
+                // User chooses to write array contents to console.
+                case '5':
+                    for (int i = 0; i < array.length; i++) {
+                        if (array[i] != null) {
+                            System.out.print(i + ": " + array[i]);
+                        }
+                    }
+                    System.out.println();
+
+            }
+        }
     }
 
-    private static void stringArrayOpsMenu(Scanner scanner, Character input, String[] array, TypeChoice typeChoice) { 
-
+    private static void stringArrayOpsMenu(Scanner scanner, Character input, String[] array) { 
+        System.out.println("What type of operation would you like to perform on your array? \n" +
+        "1. Assign a value at a given index\n" +
+        "2. Assign array with new array of different size\n" +
+        "3. Draw a diagram of the array\n" +
+        "4. Draw a series of diagrams of the array being sorted\n" +
+        "5. Write array contents to the console\n" +
+        "0. EXIT\n" +
+        "A. Repeat options");
+        input = getInput(scanner);
     }
 
     public static void main(String[] args) {
