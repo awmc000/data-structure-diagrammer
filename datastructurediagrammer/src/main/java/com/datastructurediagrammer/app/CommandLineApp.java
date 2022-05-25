@@ -7,6 +7,11 @@ import com.datastructurediagrammer.arrays.ArrayDiagrammer;
 
 public class CommandLineApp {
 
+    enum TypeChoice { 
+        STRING,
+        INTEGER
+    }
+
     private static char getInput(Scanner scanner) {
         String input = scanner.next();
 
@@ -36,13 +41,13 @@ public class CommandLineApp {
                 case '1':
                     Integer[] intArray = new Integer[10];
                     intArray[0] = Integer.valueOf(-0);
-                    arrayOperationsMenu(scanner, in, intArray);
+                    integerArrayOpsMenu(scanner, in, intArray, TypeChoice.INTEGER);
                     break;
 
                 case '2':
                     String[] strArray = new String[10];
                     strArray[0] = "";
-                    arrayOperationsMenu(scanner, in, strArray);
+                    stringArrayOpsMenu(scanner, in, strArray, TypeChoice.STRING);
                     break;
 
                 default:
@@ -53,112 +58,11 @@ public class CommandLineApp {
         return;
     }
 
-    private static <T> void arrayOperationsMenu(Scanner scanner, char in, T[] array) {
-        while (!(in == '0')) {
-            System.out.println("What type of operation would you like to perform on your array? \n" +
-                    "1. Assign a value at a given index\n" +
-                    "2. Assign array with new array of different size\n" +
-                    "3. Draw a diagram of the array\n" +
-                    "4. Draw a series of diagrams of the array being sorted\n" +
-                    "5. Write array contents to the console\n" +
-                    "0. EXIT\n" +
-                    "A. Repeat options");
+    private static void integerArrayOpsMenu(Scanner scanner, Character input, Integer[] array, TypeChoice typeChoice) { 
 
-            /*String input = scanner.next();
-            if (input.length() > 0) {
-                in = input.charAt(0);
-            }*/
-            in = getInput(scanner);
-            switch (in) {
-                case '1':
-                    // If T is String
-                    if (array[0].getClass().equals(String.class)) {
-                        System.out.print("Please enter the string you wish to add: ");
-                        T add = null;
-                        boolean doneGettingString = false;
-                        while (!doneGettingString) { 
-                            try { 
-                                add = (T) scanner.next();
-                                doneGettingString = true;
-                            } catch (InputMismatchException e) { 
-                                // heckin
-                                continue;
-                            }
-                            
-                        }
-                        
-                        System.out.print("\nPlease enter the index of the array to which you wish to add it: ");
-                        // When taking the desired index to add to, there are safeguards:
-                        // 1. Negative input will be turned into positive
-                        // 2. Modulo array size operation protects against numbers which are too high
-                        int index = Math.abs(scanner.nextInt() % array.length);
+    }
 
-                        // Perform the insertion
-                        array[index] = add;
-                    }
-                    // If T is Integer
-                    else if (array[0].getClass().equals(Integer.class)) {
-                        System.out.print("Please enter the integer you wish to add: ");
-                        Integer add = Integer.parseInt(scanner.next());
-                        System.out.println("\nPlease enter the index of the array to which you wish to add it: ");
-                        int index = Math.abs(scanner.nextInt() % array.length);
-
-                        // Perform the insertion
-                        array[index] = (T) add;
-                    }
-                    break;
-
-                case '2':
-                    // TODO: Set up new array of given size and copy over elements.
-
-                    // Ask user for size desired.
-                    System.out.print("Please enter the integer size you would like to resize the array to: ");
-
-                    int chosenSize = scanner.nextInt();
-
-                    if (chosenSize < 0) {
-                        System.out.println("Cannot be negative.");
-                    } else if (chosenSize > 100) {
-                        System.out.println("Warning: Diagrams may be very large or generate improperly at this size.");
-                    }
-
-                    break;
-
-                case '3':
-                    // Generate diagram to given filepath.
-                    System.out.print("\nPlease enter the desired title for the diagram: ");
-                    String title = scanner.next();
-                    System.out.print("Please enter the desired absolute filepath for the diagram: ");
-                    String filepath = scanner.next();
-
-                    ArrayDiagrammer<T> diagrammer = new ArrayDiagrammer<>();
-
-                    System.out.println("To confirm you want to draw a diagram titled "
-                            + title + " at the absolute filepath below, enter Y" + "\n" + filepath);
-
-                    if (!(scanner.next().equals("Y"))) {
-                        System.out.println("Diagram operation cancelled.");
-                        break;
-                    } else {
-                        diagrammer.drawToFile(array, title, filepath);
-                        System.out.println("Generated array diagram titled " + title
-                                + ". The png file can be found at " + "\n" + filepath);
-                    }
-                    break;
-
-                case '4':
-                    break;
-
-                case '5':
-                    for (T val : array) {
-                        if (val != null) {
-                            System.out.print(val.toString() + " ");
-                        }
-                    }
-                    System.out.println();
-
-            }
-        }
+    private static void stringArrayOpsMenu(Scanner scanner, Character input, String[] array, TypeChoice typeChoice) { 
 
     }
 
