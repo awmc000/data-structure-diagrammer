@@ -102,7 +102,7 @@ implements DataStructureDiagrammer<DoublyLinkedList<T>> {
                 drawPreviousPointer(graphics, imageWidth, i, nodeHeight, margin);
             }
             // Continue traversal, to next node which needs to be drawn.
-            currentNode = currentNode.next;
+            currentNode = (DLLNode<T>) currentNode.next;
         }
 
         // Close graphics object, similar to closing a scanner

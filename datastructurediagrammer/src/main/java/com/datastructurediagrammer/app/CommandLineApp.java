@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.datastructurediagrammer.arrays.ArrayDiagrammer;
+import com.datastructurediagrammer.linkedlists.SinglyLinkedList;
 import com.datastructurediagrammer.sorting.BubbleSortArrayDiagrammer;
 
 public class CommandLineApp {
@@ -24,18 +25,24 @@ public class CommandLineApp {
         }
     }
 
-    private static void dllSetupMenu(Scanner scanner, char in) { 
+    //TODO: implement integer linked list operations
+    private static void integerLinkedListOpsMenu(Scanner scanner, char in, SinglyLinkedList<Integer> list) { 
+
+    }
+
+    private static void linkedListSetupMenu(Scanner scanner, char in, boolean doublyLinked) { 
         while (in != '0') { 
-            System.out.println("What type of operation would you like to perform on your linked list?\n" + 
-            "1. Prepend a value\n" + 
-            "2. Append  a value\n" + 
-            "3. Draw a diagram of the linked list to PNG\n" + 
-            "4. Write contents to console");
+            System.out.println("What type of data would you like your linked list to contain?\n" + 
+            "1. Integer\n" + 
+            "2. String\n" +
+            "0. EXIT \n " +
+            "A. Repeat options");
             in = getInput(scanner);
 
             // TODO: Implement options
             switch (in) { 
                 case '1':
+                    integerLinkedListOpsMenu(scanner, in, new SinglyLinkedList<Integer>());
                     break;
 
                 case '2':
@@ -194,11 +201,15 @@ public class CommandLineApp {
                 case '1':
                     arraySetupMenu(scanner, in);
                     break;
+                
+                case '2':
+                    linkedListSetupMenu(scanner, in, false);
+                    break;
+                
+                case '3':
+                    linkedListSetupMenu(scanner, in, false);
+                    break;
                 /*
-                 * case '2':
-                 * break;
-                 * case '3':
-                 * break;
                  * case '4':
                  * break;
                  * case '5':

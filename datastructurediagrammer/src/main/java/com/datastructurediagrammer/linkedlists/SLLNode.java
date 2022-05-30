@@ -1,7 +1,7 @@
 package com.datastructurediagrammer.linkedlists;
 
 public class SLLNode<U extends Comparable<U>> {
-    private U data;
+    protected U data;
     public SLLNode<U> next;
 
     SLLNode(U initData) {

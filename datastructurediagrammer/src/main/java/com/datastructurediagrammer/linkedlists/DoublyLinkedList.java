@@ -40,7 +40,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         int count = 0;
         while (currentNode != null) { 
             count++;
-            currentNode = currentNode.next;
+            currentNode = (DLLNode<T>) currentNode.next;
         }
         return count;
     }
@@ -50,7 +50,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
     }
 
     public DLLNode<T> remove(DLLNode<T> existingNode) { 
-        DLLNode<T> successor = existingNode.next;
+        DLLNode<T> successor = (DLLNode<T>) existingNode.next;
         DLLNode<T> predecessor = existingNode.previous;
 
         if (successor != null) { 
