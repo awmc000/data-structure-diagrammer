@@ -1,10 +1,11 @@
 package com.datastructurediagrammer.app;
 
 import java.util.Arrays;
-import java.util.InputMismatchException;
+//import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.datastructurediagrammer.arrays.ArrayDiagrammer;
+import com.datastructurediagrammer.linkedlists.DoublyLinkedList;
 import com.datastructurediagrammer.linkedlists.SinglyLinkedList;
 import com.datastructurediagrammer.sorting.BubbleSortArrayDiagrammer;
 
@@ -26,34 +27,29 @@ public class CommandLineApp {
     }
 
     //TODO: implement integer linked list operations
-    private static void integerLinkedListOpsMenu(Scanner scanner, char in, SinglyLinkedList<Integer> list) { 
-
+    private static void linkedListOpsMenu(Scanner scanner, char in, SinglyLinkedList<String> list) { 
+        while (in != '0') { 
+            System.out.println("What would you like to do to the singly linked list?\n" + 
+            "1. Append a value\n" + 
+            "2. Prepend a value\n" + 
+            "3. Remove a value\n" + 
+            "4. Print contents to terminal\n" + 
+            "5. Draw a diagram of the list to png\n" +
+            "0. Exit\n" + 
+            "A. Repeat options");
+        }
     }
 
-    private static void linkedListSetupMenu(Scanner scanner, char in, boolean doublyLinked) { 
+    private static void linkedListOpsMenu(Scanner scanner, char in, DoublyLinkedList<String> list) { 
         while (in != '0') { 
-            System.out.println("What type of data would you like your linked list to contain?\n" + 
-            "1. Integer\n" + 
-            "2. String\n" +
-            "0. EXIT \n " +
+            System.out.println("What would you like to do to the singly linked list?\n" + 
+            "1. Append a value\n" + 
+            "2. Prepend a value\n" + 
+            "3. Remove a value\n" + 
+            "4. Print contents to terminal\n" + 
+            "5. Draw a diagram of the list to png\n" +
+            "0. Exit\n" + 
             "A. Repeat options");
-            in = getInput(scanner);
-
-            // TODO: Implement options
-            switch (in) { 
-                case '1':
-                    integerLinkedListOpsMenu(scanner, in, new SinglyLinkedList<Integer>());
-                    break;
-
-                case '2':
-                    break;
-
-                case '3':
-                    break;
-
-                case '4':
-                    break;
-            }
         }
     }
 
@@ -203,11 +199,11 @@ public class CommandLineApp {
                     break;
                 
                 case '2':
-                    linkedListSetupMenu(scanner, in, false);
+                    linkedListOpsMenu(scanner, in, new SinglyLinkedList<String>());
                     break;
                 
                 case '3':
-                    linkedListSetupMenu(scanner, in, false);
+                    linkedListOpsMenu(scanner, in, new DoublyLinkedList<String>());
                     break;
                 /*
                  * case '4':
