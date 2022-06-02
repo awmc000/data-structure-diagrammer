@@ -6,8 +6,10 @@ import java.util.Scanner;
 
 import com.datastructurediagrammer.arrays.ArrayDiagrammer;
 import com.datastructurediagrammer.linkedlists.DoublyLinkedList;
+import com.datastructurediagrammer.linkedlists.DoublyLinkedListDiagrammer;
 import com.datastructurediagrammer.linkedlists.SinglyLinkedList;
 import com.datastructurediagrammer.sorting.BubbleSortArrayDiagrammer;
+import com.datastructurediagrammer.util.BufferedImageFileWriter;
 
 public class CommandLineApp {
 
@@ -45,11 +47,45 @@ public class CommandLineApp {
             System.out.println("What would you like to do to the singly linked list?\n" + 
             "1. Append a value\n" + 
             "2. Prepend a value\n" + 
-            "3. Remove a value\n" + 
+            "3. Remove a value [NOT WORKING YET]\n" + 
             "4. Print contents to terminal\n" + 
             "5. Draw a diagram of the list to png\n" +
             "0. Exit\n" + 
             "A. Repeat options");
+
+            in = getInput(scanner);
+            switch (in) {
+                case '1':
+                    System.out.print("Enter the value you'd like to append: ");
+                    String str = scanner.next();
+                    System.out.println();
+                    list.appendData(str);
+                    break;
+
+                case '2':
+                    System.out.print("Enter the value you'd like to prepend: ");
+                    str = scanner.next();
+                    list.prependData(str);
+                    break;
+
+                case '3':
+                    System.out.print("Enter the value you'd like to remove: ");
+                    str = scanner.next();
+                    break;
+
+                case '4':
+                    System.out.println(list.toString());
+                    break;
+
+                case '5':
+                    DoublyLinkedListDiagrammer<String> diagrammer = new DoublyLinkedListDiagrammer<>();
+                    System.out.println("Enter desired title as a line: ");
+                    String title = scanner.nextLine();
+                    System.out.println("Enter absolute filepath as a line: ");
+                    String filepath = scanner.nextLine();
+                    BufferedImageFileWriter.writeToFile(diagrammer.renderDiagram(list, title), filepath);
+
+            }
         }
     }
 
