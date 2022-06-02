@@ -20,7 +20,10 @@ public class SinglyLinkedList<T extends Comparable<T>> {
 
     public void prependData(T newData) {
         SLLNode<T> newNode = new SLLNode<T>(newData);
+        this.prepend(newNode);
+    }
 
+    public void prepend(SLLNode<T> newNode) { 
         // Case 1: Empty list - point head and tail to new node
         if (head == null) {
             head = newNode;
@@ -37,7 +40,10 @@ public class SinglyLinkedList<T extends Comparable<T>> {
 
     public void appendData(T newData) { 
         SLLNode<T> newNode = new SLLNode<T>(newData);
+        this.append(newNode);
+    }
 
+    public void append(SLLNode<T> newNode) { 
         // Case 1: Empty list - point head and tail to new node
         if (head == null) { 
             head = newNode;
@@ -98,6 +104,10 @@ public class SinglyLinkedList<T extends Comparable<T>> {
             currentNode = currentNode.next;
         }
         return count;
+    }
+
+    public boolean isEmpty() { 
+        return !(head != null);
     }
 
     public String toString() { 

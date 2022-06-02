@@ -4,8 +4,12 @@ public class DoublyLinkedList<T extends Comparable<T>> {
     public DLLNode<T> head;
     public DLLNode<T> tail;
 
-    public void prepend(T newData) {
+    public void prependData(T newData) {
         DLLNode<T> newNode = new DLLNode<T>(newData);
+        this.prepend(newNode);
+    }
+
+    public void prepend(DLLNode<T> newNode) { 
         newNode.next = head;
         head.previous = newNode;
         head = newNode;
@@ -70,5 +74,18 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         }
 
         return existingNode;
+    }
+
+    @Override
+    public String toString() { 
+        String ret = "";
+        DLLNode<T> currNode = this.head;
+        while (currNode != null) { 
+            ret += currNode.toString();
+            if (currNode.next != null) { 
+                ret += " -> ";
+            }
+        }
+        return ret;
     }
 }
