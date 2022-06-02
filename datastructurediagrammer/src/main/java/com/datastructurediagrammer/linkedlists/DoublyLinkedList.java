@@ -114,6 +114,12 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         return currentNode;
     }
 
+    /**
+     * Removes a given node. Takes advantage of the previous pointer
+     * unique to the doubly-linked list.
+     * @param existingNode
+     * @return
+     */
     public DLLNode<T> remove(DLLNode<T> existingNode) { 
         DLLNode<T> successor = (DLLNode<T>) existingNode.next;
         DLLNode<T> predecessor = existingNode.previous;
