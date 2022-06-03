@@ -16,7 +16,15 @@ public class Trie {
     public void add (String newString) { 
         // Fix up the string
         newString = fix(newString, false);
-        // TODO: Get rid of numbers and non-alphabet characters.
+        
+        // Get rid of numbers and non-alphabet characters. TODO: allow spaces.
+        String filter = "";
+        for (int i = 0; i < newString.length(); i++) { 
+            if (Character.isAlphabetic(newString.charAt(i))) { 
+                filter += Character.toString(newString.charAt(i));
+            }
+        }
+        newString = filter;
 
         // Split the string into a char array
         char[] charArray = newString.toCharArray();
@@ -118,10 +126,22 @@ public class Trie {
         return this.contains(searchKeys);
     }
 
+    /**
+     * Helper method
+     * @param character
+     * @return the integer from 0 to 25 representing the
+     * given letter 
+     */
     public static int charCode(Character character) { 
         return character - 65;
     }
 
+    /**
+     * Cleans up a given string, removing unacceptable characters
+     * @param rawString
+     * @param spacesAllowed
+     * @return
+     */
     public static String fix(String rawString, boolean spacesAllowed) {
         // Capitalize
         rawString = rawString.toUpperCase();
