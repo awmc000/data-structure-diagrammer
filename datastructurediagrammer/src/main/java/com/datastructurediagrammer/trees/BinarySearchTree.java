@@ -7,6 +7,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
         root = null;
     }
 
+    public BinarySearchTree(BSTNode<T> initRoot) { 
+        root = initRoot;
+    }
+
     /**
      * 
      * @param newData
