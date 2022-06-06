@@ -1,6 +1,6 @@
 package com.datastructurediagrammer.trees;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Random;
