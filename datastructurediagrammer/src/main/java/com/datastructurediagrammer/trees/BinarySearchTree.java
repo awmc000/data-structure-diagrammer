@@ -12,11 +12,20 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     /**
-     * 
+     * Helper method to the overloaded insert method which takes
+     * a BSTNode<T> as parameter.
      * @param newData
      */
     public void insert(T newData) { 
         BSTNode<T> newNode = new BSTNode<T>(newData);
+        this.insert(newNode);
+    }
+
+    /**
+     * BST Insert node algorithm implementation.
+     * @param newNode Node to insert.
+     */
+    public void insert(BSTNode<T> newNode) { 
         BSTNode<T> currentNode = root;
         if (root == null) { 
             root = newNode;
