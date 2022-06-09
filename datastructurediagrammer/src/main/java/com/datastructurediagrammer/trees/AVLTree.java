@@ -47,15 +47,15 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
      * @param node
      */
     private void rebalanceAncestors(AVLNode<T> node) {
+        // Set up a node for upward traversal. 
         AVLNode<T> currentNode = node.parent;
         while (currentNode != null) {
-            System.out.println("Rebalance " + currentNode.data.toString());
             if (currentNode.parent != null) {
+                // Rebalace the node above the one we are currently on.
                 rebalance(currentNode.parent);
             }
-        }
-        if (!(currentNode != null)) {
-            System.out.println("rebalanceAncestors: Node parent is null");
+            // Move upward to the next parent node.
+            currentNode = currentNode.parent;
         }
     }
 
