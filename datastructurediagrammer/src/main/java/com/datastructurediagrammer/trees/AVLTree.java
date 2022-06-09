@@ -121,12 +121,15 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
         node.updateHeight();
         if (node.getBalance() == -2) {
             if (((AVLNode<T>) node.right).getBalance() == 1) {
-                rotateRight((AVLNode<T>) node.right);
+                // "node.right =" is a bit of an experiment.
+                // I am thinking this may fix the issue of rotations
+                // not occuring.
+                node.right = rotateRight((AVLNode<T>) node.right);
             }
             return rotateLeft((AVLNode<T>) node);
         } else if (node.getBalance() == 2) {
             if (((AVLNode<T>) node.left).getBalance() == -1) {
-                rotateLeft((AVLNode<T>) node.left);
+                node.left = rotateLeft((AVLNode<T>) node.left);
             }
             return rotateRight((AVLNode<T>) node);
         }

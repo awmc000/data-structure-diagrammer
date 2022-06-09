@@ -19,8 +19,9 @@ public class AVLNode <T extends Comparable<T>> extends BSTNode<T> {
     }
 
     /**
-     * 
-     * @return
+     * Gets heights of child nodes of this node.
+     * @return size 2 int[] containing height of left and right
+     * subtree of this node.
      */
     private int[] getChildHeights() { 
         int[] results = new int[2];
@@ -66,7 +67,7 @@ public class AVLNode <T extends Comparable<T>> extends BSTNode<T> {
      * Set the child of an AVL node.
      * @param whichChild
      * @param newChild
-     * @return
+     * @return success
      */
     public boolean setChild(Child whichChild, AVLNode<T> newChild) { 
         if ((whichChild != Child.LEFT) && (whichChild != Child.RIGHT)) {
@@ -89,7 +90,7 @@ public class AVLNode <T extends Comparable<T>> extends BSTNode<T> {
      * Replace one of the children of an AVL node.
      * @param currentChild
      * @param newChild
-     * @return
+     * @return success
      */
     public boolean replaceChild(AVLNode<T> currentChild, AVLNode<T> newChild) {
         if (this.left == currentChild) { 
