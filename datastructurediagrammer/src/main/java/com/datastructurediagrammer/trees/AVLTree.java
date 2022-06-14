@@ -1,5 +1,7 @@
 package com.datastructurediagrammer.trees;
 
+import com.datastructurediagrammer.trees.AVLNode.Child;
+
 public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
     public AVLTree() {
         super();
@@ -40,6 +42,8 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
             }
         }
         rebalanceAncestors(newNode);
+        System.err.println("Inserted " + newNode.data + " into AVL tree.");
+        System.err.println("Rebalancing ancestors...");
     }
 
     /**
@@ -48,14 +52,16 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
      */
     private void rebalanceAncestors(AVLNode<T> node) {
         // Set up a node for upward traversal. 
-        AVLNode<T> currentNode = node.parent;
+        AVLNode<T> currentNode = (AVLNode<T>) node.parent;
+        System.err.println("Rebalancing - Current node: " + currentNode.data.toString());
         while (currentNode != null) {
             if (currentNode.parent != null) {
                 // Rebalace the node above the one we are currently on.
-                rebalance(currentNode.parent);
+                System.err.println("next rebalance - Parent node: " + currentNode.parent.data.toString());
+                rebalance((AVLNode<T>) currentNode.parent);
             }
             // Move upward to the next parent node.
-            currentNode = currentNode.parent;
+            currentNode = (AVLNode<T>) currentNode.parent;
         }
     }
 
@@ -66,23 +72,26 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
      * @return the node which occupies that position after rotation
      */
     public AVLNode<T> rotateLeft(AVLNode<T> a) {
-        AVLNode<T> p = a.parent;
-        AVLNode<T> b = (AVLNode<T>) a.right;
-        a.right = b.left;
-        if (b.left != null) {
-            b.left.parent = a;
+        // Convenience pointer to left child of right child of a.
+        AVLNode<T> rightLeftChild = (AVLNode<T>) a.right.left;
+
+        // Step 1 - Right child moves up to a's position.
+        // Node is temporarily detached from tree. Will be re-attached
+        if (a.parent != null) { 
+            ((AVLNode<T>) a.parent).replaceChild(a,(AVLNode<T>)a.right);
+        } else { // node is root
+            root = a.right;
+            root.parent = null;
         }
-        b.left = a;
-        a.parent = b;
-        b.parent = p;
-        if (p != null) {
-            if (p.left == a) {
-                p.left = b;
-            } else {
-                p.right = b;
-            }
-        }
-        return b;
+
+        // Step 2 - the node becomes the left child of what used
+        // to be the node's right child, is now node's parent.
+        ((AVLNode<T>) a.right).setChild(Child.LEFT, a);
+
+        // Step 3 - reattach rightLeftChild as right child of node
+        a.setChild(Child.RIGHT, rightLeftChild);
+
+        return (AVLNode<T>) a.parent;
     }
 
     /**
@@ -92,23 +101,20 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
      * @return the node which occupies that position after rotation
      */
     public AVLNode<T> rotateRight(AVLNode<T> a) {
-        AVLNode<T> p = a.parent;
-        AVLNode<T> b = (AVLNode<T>) a.left;
-        a.left = b.right;
-        if (b.right != null) {
-            b.right.parent = a;
+        AVLNode<T> leftRightChild = (AVLNode<T> )a.left.right;
+
+        if (a.parent != null) {
+            ((AVLNode<T>) a.parent).replaceChild(a,(AVLNode<T>)a.left);
+        } else { 
+            root = a.left;
+            root.parent = null;
         }
-        b.right = a;
-        a.parent = b;
-        b.parent = p;
-        if (p != null) {
-            if (p.left == a) {
-                p.left = b;
-            } else {
-                p.right = b;
-            }
-        }
-        return b;
+
+        ((AVLNode<T>) a.left).setChild(Child.RIGHT, a);
+
+        a.setChild(Child.LEFT, leftRightChild);
+
+        return (AVLNode<T>) a.parent;
     }
 
     /**
@@ -119,20 +125,19 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
      */
     public AVLNode<T> rebalance(AVLNode<T> node) {
         node.updateHeight();
+        System.err.println("Current node: " + node.data.toString() + ". Balance factor = " + node.getBalance());
         if (node.getBalance() == -2) {
             if (((AVLNode<T>) node.right).getBalance() == 1) {
-                // "node.right =" is a bit of an experiment.
-                // I am thinking this may fix the issue of rotations
-                // not occuring.
-                node.right = rotateRight((AVLNode<T>) node.right);
+                rotateRight((AVLNode<T>) node.right);
             }
             return rotateLeft((AVLNode<T>) node);
         } else if (node.getBalance() == 2) {
             if (((AVLNode<T>) node.left).getBalance() == -1) {
-                node.left = rotateLeft((AVLNode<T>) node.left);
+                rotateLeft((AVLNode<T>) node.left);
             }
             return rotateRight((AVLNode<T>) node);
         }
         return node;
     }
+
 }

@@ -11,7 +11,7 @@ public class AVLTreeTest {
     @Test
     public void placementTest() {
         AVLTree<Integer> tree = new AVLTree<>();
-        int[] testNums = { 1, 15, 12 };
+        int[] testNums = { 1, 15, 12, 13 };
         for (Integer num : testNums) {
             tree.insert(new AVLNode<Integer>(num));
         }
