@@ -1,5 +1,7 @@
 package com.datastructurediagrammer.trees;
 
+import static org.junit.Assert.assertTrue;
+
 //import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -31,6 +33,18 @@ public class BSTDiagrammer3Test {
 
     public void makeAlpahebtTrees(int number) { 
 
+    }
+
+    @Test
+    public void avlTreeTest() {
+        AVLTree<Integer> avlTree = new AVLTree<>();
+        Random rand = new Random(3);
+        for (int i = 0; i < 20; i++) { 
+            avlTree.insert(rand.nextInt(1000));
+        }
+        BSTDiagrammer3<Integer> treeDiagrammer = new BSTDiagrammer3<>(avlTree);
+        treeDiagrammer.saveFile(avlTree, "AVL Tree Test", "C:/Users/AMC/Desktop/AVL bstdiagrammer3 test/AVL Tree Test.png");
+        assertTrue(true);
     }
 
     @Test
