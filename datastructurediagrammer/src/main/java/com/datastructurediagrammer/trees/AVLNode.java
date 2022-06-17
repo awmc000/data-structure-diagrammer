@@ -11,7 +11,7 @@ public class AVLNode <T extends Comparable<T>> extends BSTNode<T> {
     
     // Data, parent, left & right are in superclass BSTNode<T>
     private int height;
-    public AVLNode<T> parent;
+    //public AVLNode<T> parent;
 
     public AVLNode(T initData) { 
         super(initData);
@@ -60,7 +60,7 @@ public class AVLNode <T extends Comparable<T>> extends BSTNode<T> {
      */
     public void updateHeight() { 
         int[] heights = getChildHeights();
-        height = (Math.max(heights[0], heights[1]));
+        height = (Math.max(heights[0], heights[1])) + 1;
     }
 
     /**
@@ -83,6 +83,7 @@ public class AVLNode <T extends Comparable<T>> extends BSTNode<T> {
         if (newChild != null) { 
             newChild.parent = this;
         }
+        updateHeight();
         return true;
     }
 

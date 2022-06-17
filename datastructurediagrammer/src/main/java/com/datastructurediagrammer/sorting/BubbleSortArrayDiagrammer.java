@@ -16,7 +16,7 @@ import com.datastructurediagrammer.util.TimeStamp;
  * Generates diagrams of each step as it performs a bubble sort on the given array.
  * @author Alex McColm
  */
-public class BubbleSortArrayDiagrammer <T extends Comparable<T>> {
+public class BubbleSortArrayDiagrammer <T extends Comparable<T>> implements SortDiagrammer<T> {
     /**
      * The BubbleSortDiagrammer owns an ArrayDiagrammer which it 
      * calls at each step.
@@ -36,6 +36,7 @@ public class BubbleSortArrayDiagrammer <T extends Comparable<T>> {
      * @param title Title to be written to the top centre of the diagram.
      * @param dirpath  Absolute path of the system directory in which to create a folder of images of stages of bubblesort
      */
+    @Override
     public ArrayList<String> renderSortingOperation(T[] array, String title, String dirpath) { 
         int swapNum = 1;
 
@@ -98,6 +99,7 @@ public class BubbleSortArrayDiagrammer <T extends Comparable<T>> {
                     swapNum++;
                 }
 
+                // Set the color being used to black.
                 graphics.setColor(Color.BLACK);
                 
                 // Only write the i and j values if writing steps is enabled
@@ -111,9 +113,16 @@ public class BubbleSortArrayDiagrammer <T extends Comparable<T>> {
         }
         
         // Turn all the buffered images to files.
+        makeFiles(bufferedImages, fileNames);
+
+        // Return the file names of the .png images.
+        return fileNames;
+    }
+
+    @Override
+    public void makeFiles(ArrayList<BufferedImage> bufferedImages, ArrayList<String> fileNames) {
         for (int i = 0; i < bufferedImages.size(); ++i) { 
             BufferedImageFileWriter.writeToFile(bufferedImages.get(i), fileNames.get(i));
         }
-        return fileNames;
     }
 }
