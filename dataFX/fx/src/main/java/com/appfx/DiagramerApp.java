@@ -20,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -86,31 +85,38 @@ public class DiagramerApp extends Application {
         VBox vbox = new VBox(opener, button); //Vbox = vertical box. Organizes elements vertically
         vbox.setAlignment(Pos.CENTER); 
 
-        Pane pane = new Pane(vbox); //
-
-        Scene scene = new Scene(pane, 582, 448, true);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Data Structure Diagrammer");
+        StackPane pane = new StackPane(vbox); //StackPane allows for items to lay on top of eachother, not
+                                            // sure why it is needed here, but it centers the items nicely.
+        
+        Scene scene = new Scene(pane, 582, 448, true);  //The numbers are the window size. They are currently
+                                                        //arbitrary.
+        primaryStage.setScene(scene);        
+        primaryStage.setTitle("Data Structure Diagrammer"); //Appears at the top of the window.
         primaryStage.show();
     }
 
     
     /** 
-     * @param primaryStage
+     * Once the enter button is clicked, the user proceeds to the main menu which is a 
+     * interactable tree menu. The user can click the branches to continue onto specific
+     * diagrammers.
+     * 
+     * @param primaryStage Note the stage has been passed in so that it can be accessed.
+     *                      Creating and using a new stage appears to create a new window.
      */
     private void enterToMainMenu(Stage primaryStage) {
 
         System.out.println("Enter button clicked!");
-
+        //The root is not displayed, but all the other tree items are attached to the root
         TreeItem<String> rootItem = new TreeItem<>("Index");
 
         TreeItem<String> arrayItem = new TreeItem<>("Arrays");
         TreeItem<String> arrayVisItem = new TreeItem<>("Array Visualizer");
-        arrayItem.getChildren().add(arrayVisItem);
+        arrayItem.getChildren().add(arrayVisItem); //TreeItems can be added explicitly like this
         rootItem.getChildren().add(arrayItem);
 
         TreeItem<String> listItem = new TreeItem<>("Lists");
-        listItem.getChildren().add(new TreeItem<>("Doubly Linked List Visualizer"));
+        listItem.getChildren().add(new TreeItem<>("Doubly Linked List Visualizer"));// or like this
         listItem.getChildren().add(new TreeItem<>("Singly Linked List Visualizer"));
         listItem.getChildren().add(new TreeItem<>("Queue Visualizer"));
         listItem.getChildren().add(new TreeItem<>("Stack Visualizer"));
@@ -129,8 +135,9 @@ public class DiagramerApp extends Application {
         TreeView<String> treeView = new TreeView<>();
         treeView.setRoot(rootItem);
 
-        treeView.setShowRoot(false);
-
+        treeView.setShowRoot(false); //We are not showing the root, but we could instead make
+                                     // arrayItem the root and show it.
+        //This is the listener that reacts when one of the branches are clicked.
         treeView.getSelectionModel().selectedItemProperty()
                 .addListener((ChangeListener<Object>) new ChangeListener<Object>() {
 
@@ -141,7 +148,8 @@ public class DiagramerApp extends Application {
                         TreeItem<String> selectedItem = (TreeItem<String>) newValue;
                         System.out.println("Selected Text : " + selectedItem.getValue());
 
-                        switch (selectedItem.getValue()) {
+                        switch (selectedItem.getValue()) {//selectedItem.getValue returns the text
+                                                          // so were are matching the cases to their text
 
                             case "Array Visualizer": {
                                 System.out.println("Array Visualizer Action");
@@ -171,7 +179,7 @@ public class DiagramerApp extends Application {
                             case "Bubble Sort Visualizer": {
                                 System.out.println("Bubble Sort Visualizer Action");
 
-                                bubbleSort(primaryStage);
+                                bubbleSort(primaryStage); //again passing in the primaryStage.
 
                                 // Let's start with Bubble sort because we know it works.
                                 break;
@@ -200,7 +208,7 @@ public class DiagramerApp extends Application {
                     }
 
                 });
-
+        
         VBox vbox = new VBox(treeView);
 
         Scene scene = new Scene(vbox, 582, 448, true);
@@ -211,25 +219,30 @@ public class DiagramerApp extends Application {
 
     
     /** 
+     * This method effectively is the View and Controller for the window only having
+     * to do with the bubbleSort diagramer.
+     * 
      * @param primaryStage
      */
     private void bubbleSort(Stage primaryStage) {
-
+        //Added this a separate texts to make it easier to center them
         Text opener = new Text("Welcome to the Bubble Sort Visualizer");
         Text subOpener = new Text("Please input the values separated only by a comma.");
         Text extra = new Text("Then select the array type to continue.");
 
-        TextArea textArea = new TextArea();
+        TextArea textArea = new TextArea(); //This is the user input area
 
         textArea.setFont(Font.font("Arial", FontWeight.BOLD, 30));
         textArea.setMinSize(200, 40);
-        textArea.setMaxSize(562, 180);
+        textArea.setMaxSize(562, 180);//I made it this big so that the scroll bars
+                                      // always displayed properly
 
         Button buttonInt = new Button();
         buttonInt.setText("Integer Array");
         buttonInt.setOnAction((event) -> {
             try {
-                processIntArr(primaryStage, textArea.getText());
+                processIntArr(primaryStage, textArea.getText());//passing the primaryStage and the text that
+                                                                //the user input.
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -241,8 +254,13 @@ public class DiagramerApp extends Application {
         buttonString.setOnAction((event) -> {
             // processStringArr(primaryStage, textArea.getText());
         });
+        Button home = new Button("Home");
+        home.setAlignment(Pos.TOP_RIGHT);
+        home.setOnAction((event) -> {
+            enterToMainMenu(primaryStage);
+        });        
 
-        VBox vbox = new VBox(opener, subOpener, extra, textArea, buttonInt, buttonString);
+        VBox vbox = new VBox(opener, subOpener, extra, textArea, buttonInt, buttonString, home);
         vbox.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(vbox, 582, 448, true);
@@ -251,20 +269,24 @@ public class DiagramerApp extends Application {
         primaryStage.show();
     }
 
-    int slideshowCount = 0;
+    int slideshowCount = 0; //I am not sure why this variable needs to be declared globally, 
+                            //but it does. Could be put up top, but whateves
 
-    
     /** 
+     * This method would be a Controller method. It takes the Integer array from the user,
+     * sends it thru the model classes, returns a stack(actually an ArrayList) of images
+     * and then displays them on a separate thread for one second at a time.
+     * 
      * @param primaryStage
      * @param intArr
      * @throws InterruptedException
      */
     private void processIntArr(Stage primaryStage, String intArr) throws InterruptedException {
 
-        String[] parseArr = intArr.split(",");
+        String[] parseArr = intArr.split(","); //splitting the string at the commas
         Integer[] array = new Integer[parseArr.length];
 
-        for (int i = 0; i < parseArr.length; i++) {
+        for (int i = 0; i < parseArr.length; i++) { //Coverting the string numbers to integers
 
             if (i > (array.length - 1)) {
                 array = Arrays.copyOf(array, array.length * 2);
@@ -273,25 +295,34 @@ public class DiagramerApp extends Application {
             array[i] = Integer.valueOf(parseArr[i]);
         }
         BubbleSortArrayDiagrammer<Integer> sortDiagrammer = new BubbleSortArrayDiagrammer<>();
+        //Using Alex's model class to generate all the images of the sorting process
         ArrayList<BufferedImage> sortStack = sortDiagrammer.renderSortingOperation(array, "Integer Array Bubble Sort");
 
-        Stage stage = primaryStage;
-        GridPane pane = new GridPane();
-        Image image = convertToFxImage(sortStack.get(0));
-        ImageView imageV = new ImageView(image);
-        pane.getChildren().add(imageV);
+        GridPane pane = new GridPane(); //I think we use this for the ease of importing images
+        Image image = convertToFxImage(sortStack.get(0)); //immediately show the unsorted image
+        ImageView imageV = new ImageView(image); //I think it is easier to change the ImageView than Image
+        Button home = new Button("Home");
+        home.setAlignment(Pos.TOP_RIGHT);
+        home.setOnAction((event) -> {
+            enterToMainMenu(primaryStage);
+        });    
+        GridPane.setConstraints(home, 2, 0);    
+        GridPane.setConstraints(imageV, 1, 1);
+        pane.getChildren().addAll(imageV, home);
         pane.setAlignment(Pos.CENTER);
         Scene scene = new Scene(pane, 582, 488, true);
-        stage.setTitle("Data Structure Diagrammer");
-        stage.setScene(scene);
+        primaryStage.setTitle("Data Structure Diagrammer");
+        primaryStage.setScene(scene);
 
-        Task<Void> task = new Task<Void>() {
+        Task<Void> task = new Task<Void>() { //This creates a separate thread which loops and pauses
+                                             // to display all the images in the stack.
+                                             //Using a loop without a separate thread does not work!
             @Override
             public Void call() throws Exception {
                 for (int i = 0; i < sortStack.size(); i++) {
-                    Platform.runLater(new Runnable() {
+                    Platform.runLater(new Runnable() { //Not sure what this is...copy/past from StackOverflow
                         @Override
-                        public void run() {
+                        public void run() { //important lifecycle method
                             imageV.setImage(convertToFxImage(sortStack.get(slideshowCount)));
                             slideshowCount++;
                         }
@@ -304,12 +335,14 @@ public class DiagramerApp extends Application {
         };
         Thread th = new Thread(task);
         th.setDaemon(true);
-        th.start();
+        th.start();//this is actually where the thread gets realized
 
     }
 
     
     /** 
+     * Have we tested the string array for bubble sort?
+     * 
      * @param stringArr
      */
     private void processStringArr(String stringArr) {
@@ -318,17 +351,21 @@ public class DiagramerApp extends Application {
 
     
     /** 
-     * @param image
+     * I pulled this off the internet, but it appears to actually redraw the image from the
+     * bufferedImage to image by the pixel... Probably not very effecient. Can we write the 
+     * model files using the Image class instead?
+     * 
+     * @param bufferedimage
      * @return Image
      */
-    private static Image convertToFxImage(BufferedImage image) {
+    private static Image convertToFxImage(BufferedImage bufferedImage) {
         WritableImage wr = null;
-        if (image != null) {
-            wr = new WritableImage(image.getWidth(), image.getHeight());
+        if (bufferedImage != null) {
+            wr = new WritableImage(bufferedImage.getWidth(), bufferedImage.getHeight());
             PixelWriter pw = wr.getPixelWriter();
-            for (int x = 0; x < image.getWidth(); x++) {
-                for (int y = 0; y < image.getHeight(); y++) {
-                    pw.setArgb(x, y, image.getRGB(x, y));
+            for (int x = 0; x < bufferedImage.getWidth(); x++) {
+                for (int y = 0; y < bufferedImage.getHeight(); y++) {
+                    pw.setArgb(x, y, bufferedImage.getRGB(x, y));
                 }
             }
         }
