@@ -19,4 +19,6 @@ public interface SortDiagrammer<T extends Comparable<T>> {
      * @param fileNames
      */
     public void makeFiles(ArrayList<BufferedImage> bufferedImages, ArrayList<String> fileNames);
+
+    public void setupDirs(String dirName);
 }
