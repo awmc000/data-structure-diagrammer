@@ -17,4 +17,15 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+    @Test
+    public void testMain() {
+        String[] args = {"array", "int", "1", "2", "3"};
+        App.main(args);
+    }
+
+    @Test
+    public void testMakeArray() {
+        
+    }
 }
