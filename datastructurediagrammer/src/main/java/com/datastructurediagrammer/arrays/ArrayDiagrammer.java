@@ -49,7 +49,7 @@ public class ArrayDiagrammer<T> implements DataStructureDiagrammer<T[]> {
         int cellHeight = fontMetrics.getHeight() * 2; // Height of an individual cell
         int cellWidth = maxElemWidth * 2;
 
-        imageWidth = (cellWidth * array.length) + (2 * hBuffer);
+        imageWidth = (cellWidth * array.length) + (2 * hBuffer) + 50;
         imageHeight = (2 * vBuffer) + cellHeight; 
 
         // Resize the BufferedImage real quick
