@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"com.datastructurediagrammer","c":"BufferedImageFileWriter","l":"BufferedImageFileWriter()","u":"%3Cinit%3E()"},{"p":"com.datastructurediagrammer","c":"BufferedImageFileWriter","l":"writeToFile(BufferedImage, String)","u":"writeToFile(java.awt.image.BufferedImage,java.lang.String)"}];updateSearchResults();
