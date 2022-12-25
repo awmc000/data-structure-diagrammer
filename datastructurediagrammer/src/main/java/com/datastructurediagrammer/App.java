@@ -1,6 +1,9 @@
 package com.datastructurediagrammer;
 
 import com.datastructurediagrammer.arrays.ArrayDiagrammer;
+import com.datastructurediagrammer.trees.BSTDiagrammer3;
+import com.datastructurediagrammer.trees.BinarySearchTree;
+import com.datastructurediagrammer.trees.Trie;
 import com.datastructurediagrammer.util.TimeStamp;
 
 /*
@@ -16,15 +19,17 @@ public class App {
             // strings to be its elements
             String structure = args[0];
             switch (structure) {
-                case "Array":
+                case "array":
                     makeArray(args);
                     break;
-                case "BinaryTree":
+                case "binarytree":
+                    makeBinaryTree(args);
+                    break;
+                case "trie":
                     // TODO
                     break;
-                case "Trie":
-                    // TODO
-                    break;
+                default:
+                    System.out.println("Not a valid option or data structure not supported.");
             }
         }
     }
@@ -42,6 +47,8 @@ public class App {
         // Get the number of elements to be placed in the array
         int numElems = args.length - 2; // first is data structure's keyword, second is data type, remainder are elems
         
+        String filename = TimeStamp.ts();
+
         if (typeSelected.equalsIgnoreCase("int")) {
             
             // initialize array
@@ -50,7 +57,6 @@ public class App {
             // parse elements and add to array
             for (int i = 2; i < args.length; i++) { // starts at 2 because first 2 args are container type and element type
                 intArr[i - 2] = Integer.parseInt(args[i]);
-                System.out.println("Parsed and added " + Integer.parseInt(args[i]) + " to array.");
             }
             
             // initialize diagrammer
@@ -59,8 +65,11 @@ public class App {
             System.out.println("Generating int array diagram.");
             
             // draw the diagram to a file in the working directory
-            diagrammer.drawToFile(intArr, "Int Array Diagram", TimeStamp.ts() + " Int Array Diagram.png");
-
+            filename += " Int Array Diagram.png";
+            
+            diagrammer.drawToFile(intArr, "Int Array Diagram", filename);
+            
+            System.out.println("Created diagram at: " + System.getProperty("user.dir") + filename);
         } else if (typeSelected.equalsIgnoreCase("String")) {
             
             // initialize array
@@ -74,11 +83,73 @@ public class App {
             // initialize diagrammer
             ArrayDiagrammer<String> diagrammer = new ArrayDiagrammer<>();
             
+            filename += " String Array Diagram.png";
+
             // draw diagram to file
-            diagrammer.drawToFile(stringArr, "String Array Diagram", " String Array Diagram.png");
-        
+            diagrammer.drawToFile(stringArr, "String Array Diagram", filename);
+            
+            System.out.println("Created diagram at: " + System.getProperty("user.dir") + filename);
         } else { // User did not enter "int" or "string"
             System.out.println("Types supported are 'int' and 'string'.");
         }
     }
+
+    public static void makeBinaryTree(String[] args) {
+        // Grab the type selected - should be "int" or "string"
+        String typeSelected = args[1];
+                
+        String filename = TimeStamp.ts();
+
+        if (typeSelected.equalsIgnoreCase("int")) {
+            BinarySearchTree<Integer> intTree = new BinarySearchTree<>();
+
+            // parse elements and add to array
+            for (int i = 2; i < args.length; i++) { // starts at 2 because first 2 args are container type and element type
+                intTree.insert(Integer.parseInt(args[i]));
+            }
+
+            BSTDiagrammer3<Integer> diagrammer = new BSTDiagrammer3<>(intTree);
+            filename += " Int Binary Search Tree";
+
+            diagrammer.saveFile(intTree, "Int Binary Search Tree", filename);
+
+            System.out.println("Created diagram at: " + System.getProperty("user.dir") + filename);
+        }
+        else if (typeSelected.equalsIgnoreCase("string")) {
+            BinarySearchTree<String> stringTree = new BinarySearchTree<>();
+
+            // parse elements and add to array
+            for (int i = 2; i < args.length; i++) { // starts at 2 because first 2 args are container type and element type
+                stringTree.insert(args[i]);
+            }
+
+            BSTDiagrammer3<String> diagrammer = new BSTDiagrammer3<>(stringTree);
+            filename += " String Binary Search Tree";
+
+            diagrammer.saveFile(stringTree, "String Binary Search Tree", filename);
+
+            System.out.println("Created diagram at: " + System.getProperty("user.dir") + filename);
+        } else {
+            System.out.println("Types supported are 'int' and 'string'.");
+        }
+    }
+
+    public static void makeTrie(String[] args) {
+        String typeSelected = args[1];
+
+        if (!typeSelected.equalsIgnoreCase("string")) {
+            System.out.println("Only String type is supported for Tries.");
+            return;
+        }
+
+        Trie trie = new Trie();
+
+        for (int i = 2; i < args.length; i++)
+        {
+            trie.add(args[i]);
+        }
+
+        System.out.println("Trie has been set up, but cannot be diagrammed yet.");
+    }
+
 }
