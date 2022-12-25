@@ -51,6 +51,16 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+          <configuration>
+                  <archive>
+                    <manifest>
+
+                    <!-- give full qualified name of your main class-->
+                      <mainClass>com.datastructurediagrammer.App</mainClass>
+
+                    </manifest>
+                  </archive>
+                </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
