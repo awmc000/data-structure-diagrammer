@@ -27,7 +27,7 @@ public class BSTDiagrammer3Test {
             }
         }
 
-        BSTDiagrammer3<Integer> treeDiagrammer = new BSTDiagrammer3<>(bigTree);
+        BSTDiagrammer<Integer> treeDiagrammer = new BSTDiagrammer<>(bigTree);
         treeDiagrammer.saveFile(bigTree, numbers + " Number Tree", System.getProperty("user.dir") + TimeStamp.ts() + " " + numbers + " Numbers Tree.png");
     }
 
@@ -42,7 +42,7 @@ public class BSTDiagrammer3Test {
         for (int i = 0; i < 20; i++) { 
             avlTree.insert(rand.nextInt(1000));
         }
-        BSTDiagrammer3<Integer> treeDiagrammer = new BSTDiagrammer3<>(avlTree);
+        BSTDiagrammer<Integer> treeDiagrammer = new BSTDiagrammer<>(avlTree);
         treeDiagrammer.saveFile(avlTree, "AVL Tree Test", "C:/Users/AMC/Desktop/AVL bstdiagrammer3 test/AVL Tree Test.png");
         assertTrue(true);
     }

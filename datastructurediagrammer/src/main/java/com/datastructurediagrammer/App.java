@@ -1,7 +1,7 @@
 package com.datastructurediagrammer;
 
 import com.datastructurediagrammer.arrays.ArrayDiagrammer;
-import com.datastructurediagrammer.trees.BSTDiagrammer3;
+import com.datastructurediagrammer.trees.BSTDiagrammer;
 import com.datastructurediagrammer.trees.BinarySearchTree;
 import com.datastructurediagrammer.trees.Trie;
 import com.datastructurediagrammer.util.TimeStamp;
@@ -108,7 +108,7 @@ public class App {
                 intTree.insert(Integer.parseInt(args[i]));
             }
 
-            BSTDiagrammer3<Integer> diagrammer = new BSTDiagrammer3<>(intTree);
+            BSTDiagrammer<Integer> diagrammer = new BSTDiagrammer<>(intTree);
             filename += " Int Binary Search Tree";
 
             diagrammer.saveFile(intTree, "Int Binary Search Tree", filename);
@@ -123,7 +123,7 @@ public class App {
                 stringTree.insert(args[i]);
             }
 
-            BSTDiagrammer3<String> diagrammer = new BSTDiagrammer3<>(stringTree);
+            BSTDiagrammer<String> diagrammer = new BSTDiagrammer<>(stringTree);
             filename += " String Binary Search Tree";
 
             diagrammer.saveFile(stringTree, "String Binary Search Tree", filename);

@@ -6,7 +6,7 @@ import java.awt.Color;
 //import java.awt.FontMetrics;
 //import java.util.ArrayList;
 
-public class AVLTreeDiagrammer<T extends Comparable<T>> extends BSTDiagrammer3<T> {
+public class AVLTreeDiagrammer<T extends Comparable<T>> extends BSTDiagrammer<T> {
 
     public AVLTreeDiagrammer(BinarySearchTree<T> tree) {
         super(tree);
