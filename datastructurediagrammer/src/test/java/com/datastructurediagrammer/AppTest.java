@@ -27,6 +27,6 @@ public class AppTest
     @Test
     public void testMakeArray() {
         String[] args = {"array", "string", "hello", "world", "goodbye", "mars"};
-        App.makeArray(args);
+        App.makeArray(args, "String", args.length - 2);
     }
 }
