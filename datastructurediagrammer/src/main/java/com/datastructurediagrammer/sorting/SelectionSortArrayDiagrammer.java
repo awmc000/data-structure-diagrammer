@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.datastructurediagrammer.arrays.ArrayDiagrammer;
 import com.datastructurediagrammer.util.TimeStamp;
 
+// TODO: Finish Selection Sort implementation
 public class SelectionSortArrayDiagrammer<T extends Comparable<T>> implements SortDiagrammer<T> {
 
     private ArrayDiagrammer<T> arrayDiagrammer;
@@ -22,7 +23,7 @@ public class SelectionSortArrayDiagrammer<T extends Comparable<T>> implements So
 
     @Override
     public ArrayList<String> renderSortingOperation(T[] array, String title, String dirpath) {
-        int swapNum = 1;
+        //int swapNum = 1;
                 // TODO Auto-generated method stub
         // This timestamp will be used as part of the folder name
         String timeStamp = TimeStamp.ts();
@@ -39,7 +40,7 @@ public class SelectionSortArrayDiagrammer<T extends Comparable<T>> implements So
          * and its fileName have the same index in the two ArrayLists. That is,
          * the filename for bufferedImages.get(0) should be at fileNames.get(0)
          */
-        ArrayList<BufferedImage> bufferedImages = new ArrayList<>();
+        //ArrayList<BufferedImage> bufferedImages = new ArrayList<>();
         ArrayList<String> fileNames = new ArrayList<String>();
 
         // i is the next item in the unsorted partition.
