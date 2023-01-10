@@ -3,6 +3,8 @@
 
 ## What it is
 
+A command line tool to a.) generate diagrams of container data structures such as linked lists and trees and b.) generate series of diagrams, suitable for compiling to `.gif`, of a sorting operation carried out on a populated data container.
+
 ## Why it is useful
 
 ## How to use it
