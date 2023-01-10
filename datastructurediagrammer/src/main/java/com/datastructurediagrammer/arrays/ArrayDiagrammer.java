@@ -9,6 +9,11 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 
+/*
+ * ArrayDiagrammer
+ * 
+ * Purpose: Generate diagrams of arrays in the form of BufferedImages.
+ */
 public class ArrayDiagrammer<T> implements DataStructureDiagrammer<T[]> {
     /**
      * Returns a BufferedImage object of a completed diagram of an array.

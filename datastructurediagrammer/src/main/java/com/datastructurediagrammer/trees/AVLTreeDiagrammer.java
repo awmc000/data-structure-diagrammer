@@ -6,6 +6,13 @@ import java.awt.Color;
 //import java.awt.FontMetrics;
 //import java.util.ArrayList;
 
+/*
+ * AVLTreeDiagrammer
+ * 
+ * Purpose: Generate a diagram of an AVL tree, extending
+ * the capability of the BST diagrammer by adding height and balance
+ * factor information. Result should be a BufferedImage.
+ */
 public class AVLTreeDiagrammer<T extends Comparable<T>> extends BSTDiagrammer<T> {
 
     public AVLTreeDiagrammer(BinarySearchTree<T> tree) {
