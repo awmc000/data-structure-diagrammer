@@ -112,6 +112,14 @@ public class BubbleSortArrayDiagrammer<T extends Comparable<T>> implements SortD
             }
         }
 
+        // Generate image of array *after* sort.
+        BufferedImage finalImage = arrayDiagrammer.renderDiagram(array, title + "After Bubble Sort");
+        
+        // add the final image and its filename to the lists
+        bufferedImages.add(finalImage);
+        fileNames.add(dirName + timeStamp + title + "After Bubble Sort");
+        
+
         // Turn all the buffered images to files.
         makeFiles(bufferedImages, fileNames);
 
