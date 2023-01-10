@@ -7,7 +7,13 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.FontMetrics;
 
-public class SinglyLinkedListDiagrammer /*extends DataStructureDiagrammer<SinglyLinkedList>*/ {
+// TODO: fix inheritance/implementation of DataStructureDiagrammer
+/*
+ * SinglyLinkedListDiagrammer
+ * 
+ * Purpose: Draw a diagram of a given singly linked list to a BufferedImage.
+ */
+public class SinglyLinkedListDiagrammer <T extends Comparable<T>> /* DataStructureDiagrammer<SinglyLinkedList>*/ {
     /* Where is currentNode used in this method? **removed**
      * If this method does not take a SLLNode as parameter, it can be used exactly as is by DoublyLinkedListDiagrammer,
      * so I can have DoublyLinkedListDiagrammer extend this class.
