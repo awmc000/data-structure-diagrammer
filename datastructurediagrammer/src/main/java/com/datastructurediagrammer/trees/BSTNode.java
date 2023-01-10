@@ -1,11 +1,23 @@
 package com.datastructurediagrammer.trees;
 
+/*
+ * Node class for Binary Search Tree
+ * 
+ */
 public class BSTNode<T extends Comparable<T>> {
     protected T data;
-    public BSTNode<T> parent;
+    
+    // references to parent and child nodes
+    public BSTNode<T> parent; // null if head
     public BSTNode<T> left;
     public BSTNode<T> right;
 
+    /*
+     * Constructor.
+     * 
+     * initially just sets data and does not touch references.
+     * The references should be set on insertion.
+     */
     public BSTNode(T initData) { 
         data = initData;
         parent = null;

@@ -5,6 +5,15 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
+/*
+ * BufferedImageFileWriter
+ * 
+ * Purpose: Take buffered images, turn them to image files,
+ * and write them to the file system.
+ * 
+ * Input/Output: See "writeToFile()" method.
+ */
+
 public class BufferedImageFileWriter {
     /**
      * 
@@ -23,6 +32,8 @@ public class BufferedImageFileWriter {
         // The big moment: Write the finished result to a PNG file
         try { 
             ImageIO.write(bufferedImage, "PNG", finishedFile);
+            // Tell the user of the CLI that the image is saved and where it is.
+            System.out.println("Saved image sucessfully at " + filepath);
         } 
         catch (IOException e) { 
             System.out.println("Had a problem writing BufferedImage to file!");
