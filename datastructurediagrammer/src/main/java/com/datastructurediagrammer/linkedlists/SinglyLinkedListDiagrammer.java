@@ -1,11 +1,6 @@
 package com.datastructurediagrammer.linkedlists;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import com.datastructurediagrammer.util.BufferedImageFileWriter;
 
 import java.awt.Graphics2D;
