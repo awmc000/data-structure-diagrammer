@@ -42,45 +42,27 @@ In this tree representation of the repo dirs and files, `//` marks a comment as 
 │   └── fx
 │       ├── pom.xml
 │       ├── README.md
-│       ├── src
-│       │   └── main
-│       │       ├── java
-│       │       │   ├── com
-│       │       │   │   └── appfx
-│       │       │   │       ├── ArrayDiagrammer.java
-│       │       │   │       ├── BubbleSortArrayDiagrammer.java
-│       │       │   │       ├── DiagramerApp.java
-│       │       │   │       └── util
-│       │       │   │           ├── BufferedImageFileWriter.java
-│       │       │   │           ├── DataStructureDiagrammer.java
-│       │       │   │           ├── DesignOptions.java
-│       │       │   │           ├── TimeStamp.java
-│       │       │   │           └── XYPair.java
-│       │       │   └── module-info.java
-│       │       └── resources
-│       │           └── com
-│       │               └── appfx
-│       │                   ├── primary.fxml
-│       │                   └── secondary.fxml
-│       └── target
-│           └── classes
-│               ├── com
-│               │   └── appfx
-│               │       ├── ArrayDiagrammer.class
-│               │       ├── BubbleSortArrayDiagrammer.class
-│               │       ├── DiagramerApp$1.class
-│               │       ├── DiagramerApp$2$1.class
-│               │       ├── DiagramerApp$2.class
-│               │       ├── DiagramerApp.class
-│               │       ├── primary.fxml
-│               │       ├── secondary.fxml
-│               │       └── util
-│               │           ├── BufferedImageFileWriter.class
-│               │           ├── DataStructureDiagrammer.class
-│               │           ├── DesignOptions.class
-│               │           ├── TimeStamp.class
-│               │           └── XYPair.class
-│               └── module-info.class
+│       └── src
+│          └── main
+│              ├── java
+│              │   ├── com
+│              │   │   └── appfx
+│              │   │       ├── ArrayDiagrammer.java
+│              │   │       ├── BubbleSortArrayDiagrammer.java
+│              │   │       ├── DiagramerApp.java
+│              │   │       └── util
+│              │   │           ├── BufferedImageFileWriter.java
+│              │   │           ├── DataStructureDiagrammer.java
+│              │   │           ├── DesignOptions.java
+│              │   │           ├── TimeStamp.java
+│              │   │           └── XYPair.java
+│              │   └── module-info.java
+│              └── resources
+│                  └── com
+│                      └── appfx
+│                          ├── primary.fxml
+│                          └── secondary.fxml
+│       
 └── datastructurediagrammer
     ├── 2023-01-07T20-47-52.950394 Bubble Sort of Numbers Diagram     // test results
     ├── pom.xml      // maven build configuration.
